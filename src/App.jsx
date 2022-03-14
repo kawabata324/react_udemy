@@ -2,6 +2,7 @@ import './styles.css'
 import {useState} from "react";
 import {InputTodo} from "./components/InputTodo";
 import {IncompleteTodos} from "./components/IncompleteTodos";
+import {CompleteTodos} from "./components/CompleteTodos";
 
 export const App = () => {
     const [todoText, setTodoText] = useState('')
@@ -47,25 +48,44 @@ export const App = () => {
 
     return (
         <>
-            <InputTodo todoText={todoText} onChange={onChangeTodoText} onClick={onClickAdd}/>
+            <InputTodo
+                todoText={todoText}
+                onChange={onChangeTodoText}
+                onClick={onClickAdd}
+                style={{
+                    backgroundColor: '#c1ffff',
+                    width: '400px',
+                    height: '30px',
+                    borderRadius: '8px',
+                    padding: '8px',
+                    margin: '8px'
+                }}
+            />
             <IncompleteTodos
-                incompleteTodos={incompleteTodos}
+                todos={incompleteTodos}
                 onClickComplete={onClickComplete}
                 onClickDelete={onClickDelete}
+                style={{
+                    backgroundColor: '#c6ffe2',
+                    width: '400px',
+                    minHeight: '200px',
+                    padding: '8px',
+                    margin: '8px',
+                    borderRadius: '8px'
+                }}
             />
-            <div className="complete-area">
-                <p className="title">完了のTodo</p>
-                <ul>
-                    {completeTodos.map((todo, index) => {
-                        return (
-                            <div key={todo} className="list-row">
-                                <li>{todo}</li>
-                                <button onClick={() => onClickReturn(index)}>戻す</button>
-                            </div>
-                        )
-                    })}
-                </ul>
-            </div>
+            <CompleteTodos
+                todos={completeTodos}
+                onClickReturn={onClickReturn}
+                style={{
+                    backgroundColor: '#ffffe0',
+                    width: '400px',
+                    minHeight: '200px',
+                    padding: '8px',
+                    margin: '8px',
+                    borderRadius: '8px'
+                }}
+            />
         </>
     )
 };
